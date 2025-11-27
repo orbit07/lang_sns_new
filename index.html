@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Practice SNS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <h1>Lang Practice SNS</h1>
+      <div class="header-actions">
+        <button id="new-post-btn" class="primary">新規投稿</button>
+        <label class="file-button">
+          <input type="file" id="import-input" accept="application/json" />
+          インポート
+        </label>
+        <button id="export-btn">エクスポート</button>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button data-tab="timeline" class="active">タイムライン</button>
+      <button data-tab="search">検索</button>
+      <button data-tab="images">画像</button>
+      <button data-tab="likes">いいね</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="timeline" class="tab-panel active">
+      <div id="timeline-list" class="card-list"></div>
+    </section>
+
+    <section id="search" class="tab-panel">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="キーワード または #タグ で検索" />
+        <button id="search-btn" class="primary">検索</button>
+      </div>
+      <div id="search-results" class="card-list"></div>
+    </section>
+
+    <section id="images" class="tab-panel">
+      <div id="images-list" class="card-list"></div>
+    </section>
+
+    <section id="likes" class="tab-panel">
+      <div id="likes-list" class="card-list"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">投稿</h2>
+        <button id="modal-close" aria-label="閉じる">×</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="image-viewer" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content image-content">
+      <button id="image-close" aria-label="閉じる">×</button>
+      <img id="full-image" alt="拡大画像" />
+    </div>
+  </div>
+
+  <template id="post-template">
+    <article class="card">
+      <div class="card-meta"></div>
+      <div class="card-body"></div>
+      <div class="tag-list"></div>
+      <div class="card-actions"></div>
+      <div class="replies"></div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
