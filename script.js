@@ -603,6 +603,8 @@ function deletePost(id) {
 function deleteReply(id) {
   const target = state.data.replies.find((r) => r.id === id);
   if (!target) return;
+  const confirmed = window.confirm('このリプライを削除しますか？');
+  if (!confirmed) return;
   removeImageIfUnused(target.imageId);
   state.data.replies = state.data.replies.filter((r) => r.id !== id);
   persistData();
