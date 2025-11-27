@@ -220,19 +220,53 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   imageRow.appendChild(fileLabel);
 
   const imagePreview = document.createElement('div');
-  imagePreview.className = 'helper';
-  if (targetPost && targetPost.imageId && state.data.images[targetPost.imageId]) {
-    imagePreview.textContent = '現在の画像が設定されています。新しい画像を選ぶと置き換えます。';
-  }
+  imagePreview.className = 'image-preview';
   imageRow.appendChild(imagePreview);
 
+  const removeImageBtn = document.createElement('button');
+  removeImageBtn.type = 'button';
+  removeImageBtn.textContent = '画像を削除';
+  removeImageBtn.className = 'danger';
+  imageRow.appendChild(removeImageBtn);
+
+  const originalImageId = targetPost?.imageId || null;
+  const existingImageUrl = originalImageId ? state.data.images[originalImageId] : null;
   let imageDataUrl = null;
+  let removeImage = false;
+
+  const renderPreview = () => {
+    imagePreview.innerHTML = '';
+    const currentUrl = imageDataUrl || (!removeImage ? existingImageUrl : null);
+    if (currentUrl) {
+      const img = document.createElement('img');
+      img.src = currentUrl;
+      img.alt = '選択中の画像';
+      imagePreview.appendChild(img);
+    } else {
+      const helper = document.createElement('div');
+      helper.className = 'helper';
+      helper.textContent = '画像は選択されていません。';
+      imagePreview.appendChild(helper);
+    }
+    removeImageBtn.disabled = !currentUrl && !existingImageUrl;
+  };
+
+  renderPreview();
+
   fileInput.addEventListener('change', async (e) => {
     const [file] = e.target.files;
     if (!file) return;
     const dataUrl = await readFileAsDataUrl(file);
     imageDataUrl = await resizeIfNeeded(dataUrl);
-    imagePreview.textContent = '画像を読み込みました。';
+    removeImage = false;
+    renderPreview();
+  });
+
+  removeImageBtn.addEventListener('click', () => {
+    imageDataUrl = null;
+    removeImage = true;
+    fileInput.value = '';
+    renderPreview();
   });
 
   const actions = document.createElement('div');
@@ -261,6 +295,8 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
     if (imageDataUrl) {
       imageId = ensureImageId(imageDataUrl);
+    } else if (removeImage) {
+      imageId = null;
     }
 
     if (mode === 'reply') {
@@ -281,6 +317,13 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
       targetPost.updatedAt = Date.now();
       if (imageDataUrl !== null) {
         targetPost.imageId = imageId;
+        targetPost.imageRemoved = false;
+        if (originalImageId && originalImageId !== imageId) {
+          removeImageIfUnused(originalImageId);
+        }
+      } else if (removeImage) {
+        removeImageIfUnused(originalImageId);
+        targetPost.imageId = null;
         targetPost.imageRemoved = false;
       }
     } else {
@@ -383,7 +426,7 @@ function renderPostCard(post, options = {}) {
   const actions = node.querySelector('.card-actions');
   const repliesWrap = node.querySelector('.replies');
 
-  meta.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''} ${post.repostOf ? ' / 🔁 Repost' : ''}`;
+    meta.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''}${post.repostOf ? ' / 🔁 Repost' : ''}`;
 
   body.innerHTML = '';
   if (post.isDeleted) {
@@ -532,6 +575,8 @@ function openImageViewer(src) {
 }
 
 function deletePost(id) {
+  const confirmed = window.confirm('このポストを削除しますか？');
+  if (!confirmed) return;
   const hasReplies = state.data.replies.some((r) => r.postId === id);
   const post = state.data.posts.find((p) => p.id === id);
   if (!post) return;
@@ -578,10 +623,12 @@ function runSearch() {
 
   let results = state.data.posts.filter((p) => !p.isDeleted);
   if (tagFilter) {
-    results = results.filter((p) => p.tags.includes(tagFilter));
+    const tagLower = tagFilter.toLowerCase();
+    results = results.filter((p) => p.tags.some((tag) => tag.toLowerCase() === tagLower));
   }
   if (textTerms.length) {
-    results = results.filter((p) => textTerms.every((term) => p.texts.some((t) => t.content.includes(term))));
+    const lowerTerms = textTerms.map((t) => t.toLowerCase());
+    results = results.filter((p) => lowerTerms.every((term) => p.texts.some((t) => t.content.toLowerCase().includes(term))));
   }
   results.sort((a, b) => b.createdAt - a.createdAt);
 
@@ -632,7 +679,10 @@ function setupTabs() {
 }
 
 function setupGlobalEvents() {
-  document.getElementById('new-post-btn').addEventListener('click', () => openModal(buildPostForm({ mode: 'create' }), '新規投稿'));
+  ['new-post-btn', 'fab-new-post'].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', () => openModal(buildPostForm({ mode: 'create' }), '新規投稿'));
+  });
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('image-close').addEventListener('click', () => document.getElementById('image-viewer').classList.add('hidden'));
   document.getElementById('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') closeModal(); });
