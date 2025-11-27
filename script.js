@@ -575,11 +575,20 @@ function openImageViewer(src) {
 }
 
 function deletePost(id) {
-  const confirmed = window.confirm('このポストを削除しますか？');
-  if (!confirmed) return;
-  const hasReplies = state.data.replies.some((r) => r.postId === id);
   const post = state.data.posts.find((p) => p.id === id);
   if (!post) return;
+  const isRepost = Boolean(post.repostOf);
+  const message = isRepost
+    ? 'このリポストを削除します。元の投稿は残ります。'
+    : 'このポストを削除しますか？';
+
+  if (isRepost) {
+    window.alert(message);
+  }
+
+  const confirmed = window.confirm(isRepost ? `${message}\n本当に削除してよろしいですか？` : message);
+  if (!confirmed) return;
+  const hasReplies = state.data.replies.some((r) => r.postId === id);
   if (hasReplies) {
     post.isDeleted = true;
     post.texts = [{ content: '', language: 'ja' }];
