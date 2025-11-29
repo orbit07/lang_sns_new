@@ -144,7 +144,7 @@ function closeModal() {
   document.getElementById('modal').classList.add('hidden');
 }
 
-function createTextBlockInput(value = '', lang = 'ja', removable = true) {
+function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemove = null) {
   const wrapper = document.createElement('div');
   wrapper.className = 'text-area-wrapper';
 
@@ -178,8 +178,10 @@ function createTextBlockInput(value = '', lang = 'ja', removable = true) {
     removeBtn.addEventListener('click', () => {
       if (wrapper.parentElement.children.length > 1) {
         wrapper.remove();
+        if (onRemove) onRemove();
       }
     });
+    removeBtn.className = 'remove-text-btn';
     langRow.appendChild(removeBtn);
   }
 
@@ -191,22 +193,42 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   const container = document.createElement('div');
   const textAreaContainer = document.createElement('div');
   textAreaContainer.id = 'text-block-container';
-  textAreaContainer.appendChild(createTextBlockInput());
+  let addBtn;
+
+  const updateTextControls = () => {
+    const count = textAreaContainer.children.length;
+    if (addBtn) addBtn.disabled = count >= 3;
+    const removeButtons = textAreaContainer.querySelectorAll('.remove-text-btn');
+    removeButtons.forEach((btn) => {
+      btn.disabled = count <= 1;
+    });
+  };
+
+  const handleTextBlockChange = () => updateTextControls();
+
+  const addTextBlock = (content = '', language = 'ja') => {
+    const block = createTextBlockInput(content, language, true, handleTextBlockChange);
+    textAreaContainer.appendChild(block);
+    handleTextBlockChange();
+  };
 
   if (targetPost) {
     textAreaContainer.innerHTML = '';
     const texts = targetPost.texts || [{ content: '', language: 'ja' }];
-    texts.forEach((t, idx) => textAreaContainer.appendChild(createTextBlockInput(t.content, t.language, idx !== 0)));
+    texts.forEach((t) => addTextBlock(t.content, t.language));
+  } else {
+    addTextBlock();
   }
 
-  const addBtn = document.createElement('button');
+  addBtn = document.createElement('button');
   addBtn.type = 'button';
   addBtn.textContent = '＋ テキスト追加';
   addBtn.addEventListener('click', () => {
     if (textAreaContainer.children.length >= 3) return;
-    const block = createTextBlockInput('', 'ja', true);
-    textAreaContainer.appendChild(block);
+    addTextBlock();
   });
+
+  updateTextControls();
 
   const imageRow = document.createElement('div');
   imageRow.className = 'form-row';
