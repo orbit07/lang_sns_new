@@ -177,7 +177,7 @@ function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemov
   if (removable) {
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
-    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="18" style="display:flex">'
+    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="18" style="display:flex">';
     removeBtn.addEventListener('click', () => {
       if (wrapper.parentElement.children.length > 1) {
         wrapper.remove();
@@ -223,7 +223,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
   addBtn = document.createElement('button');
   addBtn.type = 'button';
-  addBtn.textContent = '＋ テキスト追加';
+  addBtn.textContent = '＋';
   addBtn.addEventListener('click', () => {
     if (textAreaContainer.children.length >= 3) return;
     addTextBlock();
@@ -235,7 +235,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   imageRow.className = 'form-row';
   const fileLabel = document.createElement('label');
   fileLabel.className = 'file-button';
-  fileLabel.textContent = '画像を選択（1枚まで）';
+  fileLabel.innerHTML = '<img src="img/img_on.svg" alt="画像" width="25" style="display:flex">'
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
   fileInput.accept = 'image/*';
@@ -296,12 +296,12 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   actions.className = 'modal-actions';
   const cancelBtn = document.createElement('button');
   cancelBtn.type = 'button';
-  cancelBtn.textContent = 'キャンセル';
+  cancelBtn.textContent = 'Cancel';
   cancelBtn.addEventListener('click', () => closeModal());
   const submitBtn = document.createElement('button');
   submitBtn.type = 'button';
   submitBtn.className = 'primary';
-  submitBtn.textContent = mode === 'reply' ? '返信' : mode === 'edit' ? '保存' : '投稿';
+  submitBtn.textContent = mode === 'reply' ? 'Reply' : mode === 'edit' ? 'Save' : 'Post';
 
   submitBtn.addEventListener('click', async () => {
     const textBlocks = Array.from(textAreaContainer.children).map((el) => ({
@@ -405,7 +405,7 @@ function renderTimeline() {
   container.innerHTML = '';
   const sorted = [...state.data.posts].sort((a, b) => b.createdAt - a.createdAt);
   if (!sorted.length) {
-    container.innerHTML = '<div class="empty-state">投稿がありません。新規投稿してみましょう。</div>';
+    container.innerHTML = '<div class="empty-state">投稿がありません。</div>';
     return;
   }
   sorted.forEach((post) => {

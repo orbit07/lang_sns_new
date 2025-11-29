@@ -11,6 +11,7 @@
     <nav class="tabs">
       <button data-tab="timeline" class="active timeline"></button>
       <button data-tab="search" class="search"></button>
+      <button id="fab-new-post" aria-label="新規投稿">＋</button>
       <button data-tab="images" class="images"></button>
       <button data-tab="likes" class="likes"></button>
     </nav>
@@ -22,16 +23,16 @@
       <div class="header-actions">
         <label class="file-button import_btn">
           <input type="file" id="import-input" accept="application/json" />
-          import
+          Import
         </label>
-        <button id="export-btn">export</button>
+        <button id="export-btn">Export</button>
       </div>
     </section>
 
     <section id="search" class="tab-panel">
       <div class="search-box">
         <input type="text" id="search-input" placeholder="キーワード または #タグ で検索" />
-        <button id="search-btn" class="primary">検索</button>
+        <button id="search-btn" class="primary">Search</button>
       </div>
       <div id="search-results" class="card-list"></div>
     </section>
@@ -71,8 +72,6 @@
       <div class="replies"></div>
     </article>
   </template>
-
-  <button id="fab-new-post" aria-label="新規投稿">＋</button>
 
   <script src="script.js"></script>
 </body>
