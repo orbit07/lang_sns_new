@@ -151,11 +151,21 @@ main { max-width: 960px; margin: 0 auto; padding: 12px 12px 80px; }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
+#search {
+  padding-top: 60px;
+}
 .search-box { 
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 8px;
   margin-bottom: 12px;
+  position: fixed;
+  padding: 10px;
+  min-width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(10px);
 }
 .search-box input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #57a8ff; }
 
