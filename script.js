@@ -752,10 +752,19 @@ function setupGlobalEvents() {
   window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
 }
 
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch((err) => {
+      console.error('Service worker registration failed', err);
+    });
+  }
+}
+
 function init() {
   loadData();
   setupTabs();
   setupGlobalEvents();
+  registerServiceWorker();
   render();
 }
 
