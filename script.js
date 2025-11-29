@@ -18,11 +18,13 @@ const state = {
 };
 
 const langOptions = [
-  { value: 'ja', label: 'JA (日本語)', speakable: false },
-  { value: 'en-US', label: 'EN (英語)', voiceHint: 'Samantha', speakable: true },
-  { value: 'ko-KR', label: 'KO (韓国語)', voiceHint: 'Yuna', speakable: true },
-  { value: 'zh-TW', label: 'zh-TW (台湾華語)', voiceHint: 'Meijia', speakable: true },
+  { value: 'ja', label: '日本語', speakable: false },
+  { value: 'en-US', label: '英語', voiceHint: 'Samantha', speakable: true },
+  { value: 'ko-KR', label: '韓国語', voiceHint: 'Yuna', speakable: true },
+  { value: 'zh-TW', label: '台湾華語', voiceHint: 'Meijia', speakable: true },
 ];
+
+const getLanguageLabel = (value) => langOptions.find((opt) => opt.value === value)?.label || value;
 
 function loadData() {
   try {
@@ -171,6 +173,7 @@ function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemov
   speakBtn.addEventListener('click', () => playSpeech(textarea.value, select.value));
   langRow.appendChild(speakBtn);
 
+  wrapper.appendChild(langRow);
   if (removable) {
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
@@ -182,10 +185,8 @@ function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemov
       }
     });
     removeBtn.className = 'remove-text-btn';
-    langRow.appendChild(removeBtn);
+    wrapper.appendChild(removeBtn);
   }
-
-  wrapper.appendChild(langRow);
   return wrapper;
 }
 
@@ -459,13 +460,17 @@ function renderPostCard(post, options = {}) {
       block.className = 'text-block';
       const label = document.createElement('div');
       label.className = 'text-label';
-      label.textContent = t.language.toUpperCase();
-      const play = document.createElement('button');
-      play.type = 'button';
-      play.textContent = '▶︎';
-      play.disabled = t.language === 'ja';
-      play.addEventListener('click', () => playSpeech(t.content, t.language));
-      label.appendChild(play);
+      const languageLabel = getLanguageLabel(t.language);
+      const option = langOptions.find((opt) => opt.value === t.language);
+      if (option?.speakable) {
+        const play = document.createElement('button');
+        play.type = 'button';
+        play.textContent = `▶︎${languageLabel}`;
+        play.addEventListener('click', () => playSpeech(t.content, t.language));
+        label.appendChild(play);
+      } else {
+        label.textContent = languageLabel;
+      }
       const content = document.createElement('div');
       content.className = 'text-content';
       content.textContent = t.content;
@@ -549,13 +554,17 @@ function renderPostCard(post, options = {}) {
       block.className = 'text-block';
       const label = document.createElement('div');
       label.className = 'text-label';
-      label.textContent = t.language.toUpperCase();
-      const play = document.createElement('button');
-      play.type = 'button';
-      play.textContent = '▶︎';
-      play.disabled = t.language === 'ja';
-      play.addEventListener('click', () => playSpeech(t.content, t.language));
-      label.appendChild(play);
+      const languageLabel = getLanguageLabel(t.language);
+      const option = langOptions.find((opt) => opt.value === t.language);
+      if (option?.speakable) {
+        const play = document.createElement('button');
+        play.type = 'button';
+        play.textContent = `▶︎${languageLabel}`;
+        play.addEventListener('click', () => playSpeech(t.content, t.language));
+        label.appendChild(play);
+      } else {
+        label.textContent = languageLabel;
+      }
       const content = document.createElement('div');
       content.className = 'text-content';
       content.textContent = t.content;
