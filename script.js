@@ -449,7 +449,12 @@ function renderPostCard(post, options = {}) {
   const actions = node.querySelector('.card-actions');
   const repliesWrap = node.querySelector('.replies');
 
-    meta.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''}${post.repostOf ? ' / 🔁 Repost' : ''}`;
+    meta.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''}`;
+    if (post.repostOf) {
+      const repostInfo = document.createElement('span');
+      repostInfo.innerHTML = ' / <img src="img/repost.svg" alt="リポスト" width="16" style="display:flex"> Repost';
+      meta.appendChild(repostInfo);
+    }
 
   body.innerHTML = '';
   if (post.isDeleted) {
@@ -530,7 +535,9 @@ function renderPostCard(post, options = {}) {
     replyBtn.addEventListener('click', () => openModal(buildPostForm({ mode: 'reply', parentId: post.id }), '返信'));
 
     const likeBtn = document.createElement('button');
-    likeBtn.innerHTML = post.liked ? 'いいね中' : 'いいね';
+    likeBtn.innerHTML = post.liked
+      ? '<img src="img/hart_on.svg" alt="いいね中" width="18" style="display:flex">'
+      : '<img src="img/hart_off.svg" alt="いいね" width="18" style="display:flex">';
     if (post.liked) likeBtn.classList.add('liked');
     likeBtn.addEventListener('click', () => toggleLike(post.id));
 
