@@ -207,7 +207,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   padding: 15px 0;
 }
 
-.form-row { display: flex; gap: 8px; align-items: center; flex-direction: column;}
+.form-row { display: flex; gap: 8px; align-items: flex-start; flex-direction: column;}
 .text-area-wrapper {
   background: #fff;
   border-radius: 10px;
@@ -296,6 +296,10 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   overflow: hidden;
 }
 .file-button input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.image-actions { display: flex; gap: 8px; align-items: center; width: 100%; }
+.image-actions .file-button { width: auto; }
+.image-preview { margin-top: 4px; }
 
 .image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}
 .image-content img { width: 100%; height: auto; border-radius: 12px; }
