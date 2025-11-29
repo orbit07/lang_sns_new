@@ -6,26 +6,29 @@
   --border: #e5e7eb;
   --primary: #1f7aee;
   --danger: #d14343;
-  --shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  --shadow: 0 2px 12px hsl(259.83deg 68.24% 91.3% / 50%);
 }
 
 * { box-sizing: border-box; }
+html {
+  min-height: 100%;
+}
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
+  background-image: radial-gradient(at 40.64345573593305% 28.464997374612476%, hsla(203.5294117647059, 100%, 90%, 1) 0%, hsla(203.5294117647059, 100%, 90%, 0) 100%), radial-gradient(at 98.94149100862585% 22.899592702043094%, hsla(318.46153846153845, 100%, 94.90196078431372%, 1) 0%, hsla(318.46153846153845, 100%, 94.90196078431372%, 0) 100%), radial-gradient(at 24.578191584763232% 64.84435781080394%, hsla(0, 0%, 100%, 1) 0%, hsla(0, 0%, 100%, 0) 100%), radial-gradient(at 46.731027019307646% 20.394850017397193%, hsla(0, 0%, 100%, 1) 0%, hsla(0, 0%, 100%, 0) 100%), radial-gradient(at 80.19877710919275% 42.24729815607374%, hsla(203.5294117647059, 100%, 90%, 1) 0%, hsla(203.5294117647059, 100%, 90%, 0) 100%), radial-gradient(at 53.425662467569154% 0.8488416839858015%, hsla(318.46153846153845, 100%, 94.90196078431372%, 1) 0%, hsla(318.46153846153845, 100%, 94.90196078431372%, 0) 100%), radial-gradient(at 62.73241735744167% 33.76200319979931%, hsla(0, 0%, 100%, 1) 0%, hsla(0, 0%, 100%, 0) 100%);
 }
 
 .app-header {
   position: fixed;
   bottom: 0;
-  background: var(--card);
+  background: rgba(255, 255, 255, .5);
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow);
   z-index: 10;
   width: 100%;
+  backdrop-filter: blur(10px);
 }
 
 .header-left { /* display: flex; */ display: none; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -46,12 +49,11 @@ body {
   border-color: var(--primary);
 }
 
-main { max-width: 960px; margin: 16px auto 130px; padding: 0 12px; }
+main { max-width: 960px; margin: 0 auto; padding: 12px 12px 130px; }
 .card-list { display: flex; flex-direction: column; gap: 12px; }
 
 .card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   padding: 12px;
   box-shadow: var(--shadow);
@@ -59,7 +61,7 @@ main { max-width: 960px; margin: 16px auto 130px; padding: 0 12px; }
 
 .card-meta { font-size: 12px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
 .card-body { margin: 8px 0; display: flex; flex-direction: column; gap: 8px; }
-.text-block { padding: 8px; border-radius: 8px; background: #f3f5f7; }
+.text-block { padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.9); }
 .text-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; display: flex; gap: 6px; align-items: center; }
 .text-content { white-space: pre-wrap; line-height: 1.5; }
 
@@ -71,17 +73,25 @@ main { max-width: 960px; margin: 16px auto 130px; padding: 0 12px; }
   cursor: pointer;
 }
 
-.tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { background: #eef2f7; color: #334e68; padding: 4px 8px; border-radius: 12px; font-size: 12px; cursor: pointer; }
 
-.card-actions { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
-.card-actions button { border: 1px solid var(--border); background: #fff; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
-.card-actions .danger { color: #fff; background: var(--danger); border-color: var(--danger); }
+.card-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.card-actions button { border: none; background: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.card-actions .danger { color: #fff; background: none; border: none; }
 .card-actions .liked { color: #fff; background: #ff9f1c; border-color: #ff9f1c; }
 .card-actions .repost { color: var(--primary); border-color: var(--primary); }
 
-.replies { margin-top: 8px; border-left: 2px solid var(--border); padding-left: 12px; display: flex; flex-direction: column; gap: 10px; }
-.reply-card { background: #f9fafb; border: 1px solid var(--border); border-radius: 10px; padding: 8px; }
+.replies { 
+  margin-top: 15px;
+  margin-left: 5px;
+  border-left: 4px solid #fff;
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.reply-card { border-radius: 10px; padding: 8px; }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
@@ -94,16 +104,17 @@ button.primary { background: var(--primary); color: #fff; border: 1px solid var(
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(208, 208, 221, .5);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
   z-index: 2000;
+  backdrop-filter: blur(10px);
 }
 .modal.hidden { display: none; }
 .modal-content {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 12px;
   width: min(720px, 96vw);
   max-height: 90vh;
@@ -119,9 +130,17 @@ button.primary { background: var(--primary); color: #fff; border: 1px solid var(
 .modal-header button { border: none; background: transparent; font-size: 20px; cursor: pointer; }
 
 .form-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
-.text-area-wrapper { background: #f7f9fc; border: 1px solid var(--border); border-radius: 10px; padding: 8px; width: 100%; }
-.text-area-wrapper textarea { width: 100%; min-height: 64px; border: none; background: transparent; resize: vertical; }
+.text-area-wrapper { border: 2px solid #fff; border-radius: 10px; padding: 30px 8px 8px; width: 100%; position: relative; }
+.text-area-wrapper textarea { width: 100%; min-height: 64px; border: none; resize: vertical; }
 .text-area-wrapper textarea:focus { outline: none; }
+.remove-text-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: none;
+  padding: 6px 12px;
+}
 
 .language-select { margin-top: 6px; display: flex; gap: 6px; align-items: center; }
 
@@ -162,11 +181,16 @@ button.primary { background: var(--primary); color: #fff; border: 1px solid var(
   height: 56px;
   border-radius: 50%;
   border: none;
-  background: var(--primary);
+  background: #94c8ff;
   color: #fff;
   font-size: 28px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow);
+}
+#text-block-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 #fab-new-post:active { transform: translateY(1px); }
