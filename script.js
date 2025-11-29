@@ -233,6 +233,8 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
   const imageRow = document.createElement('div');
   imageRow.className = 'form-row';
+  const imageActions = document.createElement('div');
+  imageActions.className = 'image-actions';
   const fileLabel = document.createElement('label');
   fileLabel.className = 'file-button';
   fileLabel.innerHTML = '<img src="img/img_on.svg" alt="画像" width="25" style="display:flex">'
@@ -240,17 +242,18 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   fileInput.type = 'file';
   fileInput.accept = 'image/*';
   fileLabel.appendChild(fileInput);
-  imageRow.appendChild(fileLabel);
-
-  const imagePreview = document.createElement('div');
-  imagePreview.className = 'image-preview';
-  imageRow.appendChild(imagePreview);
+  imageActions.appendChild(fileLabel);
 
   const removeImageBtn = document.createElement('button');
   removeImageBtn.type = 'button';
   removeImageBtn.textContent = '画像を削除';
   removeImageBtn.className = 'danger';
-  imageRow.appendChild(removeImageBtn);
+  imageActions.appendChild(removeImageBtn);
+  imageRow.appendChild(imageActions);
+
+  const imagePreview = document.createElement('div');
+  imagePreview.className = 'image-preview';
+  imageRow.appendChild(imagePreview);
 
   const originalImageId = targetPost?.imageId || null;
   const existingImageUrl = originalImageId ? state.data.images[originalImageId] : null;
