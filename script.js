@@ -246,7 +246,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
   const removeImageBtn = document.createElement('button');
   removeImageBtn.type = 'button';
-  removeImageBtn.textContent = '画像を削除';
+  removeImageBtn.innerHTML = '<img src="img/delete.svg" alt="画像を削除" width="30" style="display:flex">';
   removeImageBtn.className = 'danger';
   imageActions.appendChild(removeImageBtn);
   imageRow.appendChild(imageActions);

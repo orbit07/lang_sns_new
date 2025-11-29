@@ -221,8 +221,8 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   min-height: 64px;
   border: none;
   resize: vertical;
-  background: rgba(87, 168, 255, .2);
   border-radius: 4px;
+  border: 1px solid #57a8ff;
 }
 .text-area-wrapper textarea:focus { outline: none; }
 .remove-text-btn {
@@ -297,9 +297,17 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 .file-button input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
-.image-actions { display: flex; gap: 8px; align-items: center; width: 100%; }
+.image-actions { 
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
 .image-actions .file-button { width: auto; }
-.image-preview { margin-top: 4px; }
+.image-preview {
+  margin: 0 auto;
+}
 
 .image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}
 .image-content img { width: 100%; height: auto; border-radius: 12px; }
@@ -349,11 +357,8 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 #fab-new-post:active { transform: translateY(1px); }
 
 .modal .form-row .danger {
-  color: var(--muted);
-  border: var(--muted) 1px solid;
-  padding: 5px 20px;
-  background: none;
-  font-size: 1.4rem;
+  border: none;
+  padding: 0;
 }
 
 .modal #text-block-container + button {
