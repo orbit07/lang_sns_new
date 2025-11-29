@@ -575,6 +575,8 @@ function openImageViewer(src) {
 }
 
 function deletePost(id) {
+  const post = state.data.posts.find((p) => p.id === id);
+  if (!post) return;
   const confirmed = window.confirm('このポストを削除しますか？');
   if (!confirmed) return;
   const hasReplies = state.data.replies.some((r) => r.postId === id);
