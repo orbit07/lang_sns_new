@@ -169,7 +169,7 @@ function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemov
 
   const speakBtn = document.createElement('button');
   speakBtn.type = 'button';
-  speakBtn.textContent = '▶︎ 再生';
+  speakBtn.innerHTML = '<img src="img/vol.svg" alt="" width="16" style="display:flex"> 再生';
   speakBtn.addEventListener('click', () => playSpeech(textarea.value, select.value));
   langRow.appendChild(speakBtn);
 
@@ -177,7 +177,7 @@ function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemov
   if (removable) {
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
-    removeBtn.textContent = '×';
+    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="18" style="display:flex">'
     removeBtn.addEventListener('click', () => {
       if (wrapper.parentElement.children.length > 1) {
         wrapper.remove();
@@ -470,7 +470,7 @@ function renderPostCard(post, options = {}) {
       if (option?.speakable) {
         const play = document.createElement('button');
         play.type = 'button';
-        play.textContent = `▶︎${languageLabel}`;
+        play.innerHTML = `<img src="img/vol.svg" alt="" width="16" style="display:flex"> ${languageLabel}`;
         play.addEventListener('click', () => playSpeech(t.content, t.language));
         label.appendChild(play);
       } else {
@@ -566,7 +566,7 @@ function renderPostCard(post, options = {}) {
       if (option?.speakable) {
         const play = document.createElement('button');
         play.type = 'button';
-        play.textContent = `▶︎${languageLabel}`;
+        play.innerHTML = `<img src="img/vol.svg" alt="" width="16" style="display:flex"> ${languageLabel}`;
         play.addEventListener('click', () => playSpeech(t.content, t.language));
         label.appendChild(play);
       } else {

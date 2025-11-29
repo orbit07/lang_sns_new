@@ -8,28 +8,24 @@
 </head>
 <body>
   <header class="app-header">
-    <div class="header-left">
-      <h1>Lang Practice SNS</h1>
-      <div class="header-actions">
-        <button id="new-post-btn" class="primary">新規投稿</button>
-        <label class="file-button">
-          <input type="file" id="import-input" accept="application/json" />
-          インポート
-        </label>
-        <button id="export-btn">エクスポート</button>
-      </div>
-    </div>
     <nav class="tabs">
-      <button data-tab="timeline" class="active"><img src="img/home_off.svg" alt="タイムライン" width="18" style="display:flex"></button>
-      <button data-tab="search"><img src="img/search_off.svg" alt="検索" width="18" style="display:flex"></button>
-      <button data-tab="images"><img src="img/img_off.svg" alt="画像" width="18" style="display:flex"></button>
-      <button data-tab="likes"><img src="img/hart_off.svg" alt="いいね" width="18" style="display:flex"></button>
+      <button data-tab="timeline" class="active timeline"></button>
+      <button data-tab="search" class="search"></button>
+      <button data-tab="images" class="images"></button>
+      <button data-tab="likes" class="likes"></button>
     </nav>
   </header>
 
   <main>
     <section id="timeline" class="tab-panel active">
       <div id="timeline-list" class="card-list"></div>
+      <div class="header-actions">
+        <label class="file-button import_btn">
+          <input type="file" id="import-input" accept="application/json" />
+          import
+        </label>
+        <button id="export-btn">export</button>
+      </div>
     </section>
 
     <section id="search" class="tab-panel">
@@ -53,7 +49,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2 id="modal-title">投稿</h2>
-        <button id="modal-close" aria-label="閉じる">×</button>
+        <button id="modal-close" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" style="display:flex"></button>
       </div>
       <div id="modal-body"></div>
     </div>
@@ -61,7 +57,7 @@
 
   <div id="image-viewer" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content image-content">
-      <button id="image-close" aria-label="閉じる">×</button>
+      <button id="image-close" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" style="display:flex"></button>
       <img id="full-image" alt="拡大画像" />
     </div>
   </div>
