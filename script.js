@@ -706,9 +706,10 @@ function importData(file) {
 }
 
 function setupTabs() {
-  document.querySelectorAll('.tabs button').forEach((btn) => {
+  const tabButtons = document.querySelectorAll('.tabs button[data-tab]');
+  tabButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.tabs button').forEach((b) => b.classList.remove('active'));
+      tabButtons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       state.currentTab = btn.dataset.tab;
       document.querySelectorAll('.tab-panel').forEach((panel) => {
