@@ -132,6 +132,12 @@ function enforceStorageLimit() {
   localStorage.setItem(STORAGE_KEY, serialized);
 }
 
+function updateScrollLock() {
+  const modalOpen = !document.getElementById('modal').classList.contains('hidden');
+  const imageOpen = !document.getElementById('image-viewer').classList.contains('hidden');
+  document.body.classList.toggle('modal-open', modalOpen || imageOpen);
+}
+
 function openModal(content, title = '投稿') {
   const modal = document.getElementById('modal');
   const body = document.getElementById('modal-body');
@@ -140,10 +146,12 @@ function openModal(content, title = '投稿') {
   body.innerHTML = '';
   body.appendChild(content);
   modal.classList.remove('hidden');
+  updateScrollLock();
 }
 
 function closeModal() {
   document.getElementById('modal').classList.add('hidden');
+  updateScrollLock();
 }
 
 function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemove = null) {
@@ -613,6 +621,12 @@ function openImageViewer(src) {
   const img = document.getElementById('full-image');
   img.src = src;
   viewer.classList.remove('hidden');
+  updateScrollLock();
+}
+
+function closeImageViewer() {
+  document.getElementById('image-viewer').classList.add('hidden');
+  updateScrollLock();
 }
 
 function deletePost(id) {
@@ -728,9 +742,9 @@ function setupGlobalEvents() {
     if (btn) btn.addEventListener('click', () => openModal(buildPostForm({ mode: 'create' }), '新規投稿'));
   });
   document.getElementById('modal-close').addEventListener('click', closeModal);
-  document.getElementById('image-close').addEventListener('click', () => document.getElementById('image-viewer').classList.add('hidden'));
+  document.getElementById('image-close').addEventListener('click', closeImageViewer);
   document.getElementById('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') closeModal(); });
-  document.getElementById('image-viewer').addEventListener('click', (e) => { if (e.target.id === 'image-viewer') e.target.classList.add('hidden'); });
+  document.getElementById('image-viewer').addEventListener('click', (e) => { if (e.target.id === 'image-viewer') closeImageViewer(); });
   document.getElementById('export-btn').addEventListener('click', exportData);
   document.getElementById('import-input').addEventListener('change', (e) => importData(e.target.files[0]));
   document.getElementById('search-btn').addEventListener('click', runSearch);
