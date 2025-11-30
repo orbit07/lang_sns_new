@@ -14,6 +14,9 @@
 }
 
 * { box-sizing: border-box; font-size: 1.6rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+*::placeholder {
+  color: #9fbcd8;
+}
 html {
   font-size: 62.5%;
   min-height: 100%;
@@ -111,7 +114,7 @@ button {
 .card {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 12px;
-  padding: 20px;
+  padding: 20px 20px 10px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -147,12 +150,12 @@ button {
 .tag { background: #eef2f7; color: #334e68; padding: 4px 8px; border-radius: 12px; font-size: 1.2rem; cursor: pointer; }
 
 .card-actions { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
-.card-action-button { border: none; background: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; }
+.card-action-button { border: none; background: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; display: flex; }
 .danger-action-button { color: #fff; background: none; border: none; }
 .repost-action-button { color: var(--primary); border-color: var(--primary); }
 
 .replies {
-  margin-left: 5px;
+  margin: 10px 0 10px 5px;
   border-left: 4px solid rgba(87, 168, 255, 0.3);
   padding-left: 5px;
   display: flex;
@@ -171,7 +174,7 @@ button {
 .tab-panel.active { display: block; }
 
 .search-panel {
-  padding-top: 60px;
+  padding: 50px 0 10px;
 }
 .search-box { 
   display: grid;
@@ -186,7 +189,7 @@ button {
   background: rgba(255, 255, 255, .5);
   backdrop-filter: blur(10px);
 }
-.search-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #57a8ff; }
+.search-input { flex: 1; padding: 5px; border-radius: 8px; border: 1px solid #57a8ff; }
 
 .primary-button { background: #57a8ff; color: #fff; border: 1px solid #57a8ff;}
 
@@ -214,8 +217,8 @@ button {
 .modal-body-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 20px;
+  gap: 10px;
+  padding: 20px 20px 10px;
 }
 .modal-header { display: none; justify-content: flex-end; align-items: center; }
 .modal-title {
@@ -274,6 +277,7 @@ button {
   grid-template-columns: auto auto 1fr;
   gap: 40px;
   position: sticky;
+  bottom: 0;
   backdrop-filter: blur(10px);
   align-items: center;
   padding: 10px 15px;
@@ -326,7 +330,7 @@ button {
   position: relative;
   overflow: hidden;
 }
-.file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; pointer-events: none; }
 
 .image-actions {
   display: grid;
@@ -349,20 +353,22 @@ button {
   padding: 0;
   border-radius: 9999px;
   box-shadow: var(--shadow);
+  display: flex;
 }
 
-.image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}
+.image-content {
+  background: none;
+}
 .full-image { width: 100%; height: auto; border-radius: 12px; }
 .image-close-button {
-  border: none;
   position: absolute;
-  right: 15px;
-  top: 13px;
   padding: 0;
-}
-.image-close-button {
-  width: 18px;
+  width: 25px;
+  height: 25px;
   display: flex;
+  background: #fff;
+  right: 5px;
+  top: 5px;
 }
 
 .helper { font-size: 1.4rem; color: var(--muted); }
@@ -377,7 +383,7 @@ button {
   border: 1px solid var(--border);
   display: block;
 }
-.remove-image-icon { border:none; width: 20px; height: 20px; }
+.remove-image-icon { border:none; width: 25px; height: 25px; }
 
 .fab-button {
   right: 20px;

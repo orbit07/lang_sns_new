@@ -611,6 +611,7 @@ function renderPostCard(post, options = {}) {
       if (option?.speakable) {
         const play = document.createElement('button');
         play.type = 'button';
+        play.className = 'text-action-button text-label-button';
         play.innerHTML = `<img src="img/vol.svg" alt="" width="16" class="icon-inline"> ${languageLabel}`;
         play.addEventListener('click', () => playSpeech(t.content, t.language));
         label.appendChild(play);
