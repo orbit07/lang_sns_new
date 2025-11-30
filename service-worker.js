@@ -1,4 +1,4 @@
-const CACHE_NAME = 'uni-v1';
+const CACHE_NAME = 'uni-v1.0.1';
 const ASSETS = [
   '/',
   '/index.html',
