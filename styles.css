@@ -191,7 +191,6 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   width: min(720px, 96vw);
   max-height: 90vh;
   overflow: auto;
-  padding: 15px;
   box-shadow: var(--shadow);
   position: relative;
 }
@@ -199,6 +198,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 15px;
 }
 .modal-header { display: none; justify-content: flex-end; align-items: center; }
 #modal-title {
