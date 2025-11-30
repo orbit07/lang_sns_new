@@ -160,6 +160,7 @@ function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', remov
 
   const textarea = document.createElement('textarea');
   textarea.value = value;
+  textarea.className = 'text-area';
   wrapper.appendChild(textarea);
 
   const pronunciationInput = document.createElement('input');
@@ -173,6 +174,7 @@ function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', remov
   langRow.className = 'language-select';
 
   const select = document.createElement('select');
+  select.className = 'language-select-input';
   langOptions.forEach((opt) => {
     const option = document.createElement('option');
     option.value = opt.value;
@@ -208,6 +210,7 @@ function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', remov
 function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) {
   const fragment = document.createDocumentFragment();
   const container = document.createElement('div');
+  container.className = 'modal-body-section';
   fragment.appendChild(container);
   const textAreaContainer = document.createElement('div');
   textAreaContainer.id = 'text-block-container';
@@ -256,11 +259,12 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
   fileInput.accept = 'image/*';
+  fileInput.className = 'file-input';
   fileLabel.appendChild(fileInput);
 
   const removeImageBtn = document.createElement('button');
   removeImageBtn.type = 'button';
-  removeImageBtn.innerHTML = '<img src="img/delete.svg" alt="画像を削除" width="30" style="display:flex">';
+  removeImageBtn.innerHTML = '<img src="img/delete.svg" alt="画像を削除" width="30" class="remove-image-icon" style="display:flex">';
   removeImageBtn.className = 'remove-image-btn danger';
 
   const imagePreview = document.createElement('div');
@@ -279,6 +283,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
       const img = document.createElement('img');
       img.src = currentUrl;
       img.alt = '選択中の画像';
+      img.className = 'image-preview-img';
       imagePreview.appendChild(img);
     }
     removeImageBtn.hidden = !currentUrl;
@@ -318,8 +323,8 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
   submitBtn.addEventListener('click', async () => {
     const textBlocks = Array.from(textAreaContainer.children).map((el) => ({
-      content: el.querySelector('textarea').value.trim(),
-      language: el.querySelector('select').value,
+      content: el.querySelector('.text-area').value.trim(),
+      language: el.querySelector('.language-select-input').value,
       pronunciation: el.querySelector('.pronunciation-input').value.trim(),
     }));
     const hasContent = textBlocks.some((t) => t.content.length > 0);
@@ -463,10 +468,16 @@ function renderPostCard(post, options = {}) {
   const actions = node.querySelector('.card-actions');
   const repliesWrap = node.querySelector('.replies');
 
-    meta.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''}`;
+    meta.innerHTML = '';
+    const metaText = document.createElement('span');
+    metaText.className = 'card-meta-item';
+    metaText.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''}`;
+    meta.appendChild(metaText);
+
     if (post.repostOf) {
       const repostInfo = document.createElement('span');
-      repostInfo.innerHTML = ' / <img src="img/repost.svg" alt="リポスト" width="16" style="display:flex"> Repost';
+      repostInfo.className = 'card-meta-item repost-info';
+      repostInfo.innerHTML = '/ <img src="img/repost.svg" alt="リポスト" width="16" style="display:flex"> Repost';
       meta.appendChild(repostInfo);
     }
 
@@ -574,7 +585,10 @@ function renderPostCard(post, options = {}) {
     card.className = 'reply-card';
     const metaRow = document.createElement('div');
     metaRow.className = 'card-meta';
-    metaRow.textContent = formatDate(reply.createdAt);
+    const metaText = document.createElement('span');
+    metaText.className = 'card-meta-item';
+    metaText.textContent = formatDate(reply.createdAt);
+    metaRow.appendChild(metaText);
     const bodyRow = document.createElement('div');
     bodyRow.className = 'card-body';
     reply.texts.forEach((t) => {

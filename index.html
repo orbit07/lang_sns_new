@@ -20,12 +20,12 @@
     </nav>
   </header>
 
-  <main>
+  <main class="main-container">
     <section id="timeline" class="tab-panel active">
       <div id="timeline-list" class="card-list"></div>
       <div class="header-actions">
         <label class="file-button import_btn">
-          <input type="file" id="import-input" accept="application/json" />
+          <input type="file" id="import-input" accept="application/json" class="file-input" />
           Import
         </label>
         <button id="export-btn">Export</button>
@@ -34,7 +34,7 @@
 
     <section id="search" class="tab-panel">
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="キーワード または #タグ で検索" />
+        <input type="text" id="search-input" placeholder="キーワード または #タグ で検索" class="search-input" />
         <button id="search-btn" class="primary">Search</button>
       </div>
       <div id="search-results" class="card-list"></div>
@@ -62,7 +62,7 @@
   <div id="image-viewer" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content image-content">
       <button id="image-close" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" style="display:flex"></button>
-      <img id="full-image" alt="拡大画像" />
+      <img id="full-image" class="full-image" alt="拡大画像" />
     </div>
   </div>
 

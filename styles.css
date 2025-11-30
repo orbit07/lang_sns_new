@@ -93,7 +93,7 @@ button {
   background-size: 40%;
 }
 
-main { max-width: 960px; margin: 0 auto; padding: 12px 12px 80px; }
+.main-container { max-width: 960px; margin: 0 auto; padding: 12px 12px 80px; }
 .card-list { display: flex; flex-direction: column; gap: 12px; }
 
 .card {
@@ -104,7 +104,7 @@ main { max-width: 960px; margin: 0 auto; padding: 12px 12px 80px; }
 }
 
 .card-meta { font-size: 1.2rem; color: var(--muted); display: flex; gap: 8px; align-items: center; }
-.card-meta span { font-size: 1.2rem; display: flex; gap: 7px; }
+.card-meta .card-meta-item { font-size: 1.2rem; display: flex; gap: 7px; }
 .card-body { margin: 8px 0; display: flex; flex-direction: column; gap: 8px; }
 .text-block { padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.9); }
 .text-label { font-size: 1.4rem; color: var(--muted); margin-bottom: 8px; display: flex; gap: 6px; align-items: center; }
@@ -169,7 +169,7 @@ main { max-width: 960px; margin: 0 auto; padding: 12px 12px 80px; }
   background: rgba(255, 255, 255, .5);
   backdrop-filter: blur(10px);
 }
-.search-box input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #57a8ff; }
+.search-box .search-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #57a8ff; }
 
 button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; width: 62%;}
 
@@ -194,7 +194,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   box-shadow: var(--shadow);
   position: relative;
 }
-#modal-body > div {
+#modal-body > .modal-body-section {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -220,7 +220,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   flex-direction: column;
   gap: 10px;
 }
-.text-area-wrapper textarea {
+.text-area-wrapper .text-area {
   width: 100%;
   min-height: 64px;
   border: none;
@@ -228,7 +228,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   border-radius: 4px;
   border: 1px solid #57a8ff;
 }
-.text-area-wrapper textarea:focus { outline: none; }
+.text-area-wrapper .text-area:focus { outline: none; }
 .pronunciation-input {
   width: 100%;
   padding: 6px;
@@ -249,13 +249,13 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 
 .language-select { display: flex; gap: 6px; align-items: center; }
-.language-select select {
+.language-select .language-select-input {
   border: 1px solid #57a8ff;
   border-radius: 4px;
   height: 25px;
 }
 
-#modal-body > div.modal-actions {
+#modal-body > .modal-actions {
   display: grid;
   grid-template-columns: auto auto 1fr;
   gap: 20px;
@@ -317,7 +317,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   position: relative;
   overflow: hidden;
 }
-.file-button input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.file-button .file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
 .image-actions { 
   display: grid;
@@ -343,7 +343,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 
 .image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}
-.image-content img { width: 100%; height: auto; border-radius: 12px; }
+.image-content .full-image { width: 100%; height: auto; border-radius: 12px; }
 .image-content #image-close {
   border: none;
   position: absolute;
@@ -360,7 +360,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 
 .empty-state { text-align: center; padding: 24px; color: var(--muted); }
 
-.image-preview img {
+.image-preview .image-preview-img {
   width: 160px;
   height: 120px;
   object-fit: cover;
@@ -368,11 +368,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   border: 1px solid var(--border);
   display: block;
 }
-.image-preview button img {
-  border:none;
-  width: 20px;
-  height: 20px;
-}
+.image-preview .remove-image-icon { border:none; width: 20px; height: 20px; }
 
 #fab-new-post {
   right: 20px;
