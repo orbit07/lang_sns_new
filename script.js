@@ -503,7 +503,7 @@ function renderPostCard(post, options = {}) {
       if (t.pronunciation) {
         const pronunciation = document.createElement('div');
         pronunciation.className = 'pronunciation';
-        pronunciation.textContent = `発音: ${t.pronunciation}`;
+        pronunciation.textContent = t.pronunciation;
         block.appendChild(pronunciation);
       }
       body.appendChild(block);
@@ -605,7 +605,7 @@ function renderPostCard(post, options = {}) {
       if (t.pronunciation) {
         const pronunciation = document.createElement('div');
         pronunciation.className = 'pronunciation';
-        pronunciation.textContent = `発音: ${t.pronunciation}`;
+        pronunciation.textContent = t.pronunciation;
         block.appendChild(pronunciation);
       }
       bodyRow.appendChild(block);
