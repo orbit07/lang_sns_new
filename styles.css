@@ -27,6 +27,10 @@ button {
   border-radius: 9999px;
 }
 
+.icon-inline {
+  display: inline-flex;
+}
+
 .app-header {
   position: fixed;
   bottom: 0;
@@ -41,54 +45,54 @@ button {
 .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 20px; }
 
 .tabs { display: flex; gap: 8px; justify-content: space-between; }
-.tabs button {
+.tab-button {
   border: none;
   background: none;
   border-radius: 8px;
   cursor: pointer;
   color: var(--muted);
 }
-.tabs button.timeline {
+.tab-button.tab-button-timeline {
   height: 30px;
   width: 60px;
   background: url(img/home_off.svg) no-repeat center;
   background-size: 40%;
 }
-.tabs button.timeline.active {
+.tab-button.tab-button-timeline.active {
   background: url(img/home_on.svg) no-repeat center;
   background-size: 40%;
 }
-.tabs button.search {
+.tab-button.tab-button-search {
   height: 30px;
   width: 60px;
   background: url(img/search_off.svg) no-repeat center;
   background-size: 40%;
 }
-.tabs button.search.active {
+.tab-button.tab-button-search.active {
   background: url(img/search_on.svg) no-repeat center;
   background-size: 40%;
 }
-#search-btn {
+.search-button {
   width: fit-content;
   padding: 0 20px;
 }
-.tabs button.images {
+.tab-button.tab-button-images {
   height: 30px;
   width: 60px;
   background: url(img/img_off.svg) no-repeat center;
   background-size: 40%;
 }
-.tabs button.images.active {
+.tab-button.tab-button-images.active {
   background: url(img/img_on.svg) no-repeat center;
   background-size: 40%;
 }
-.tabs button.likes {
+.tab-button.tab-button-likes {
   height: 30px;
   width: 60px;
   background: url(img/hart_off.svg) no-repeat center;
   background-size: 40%;
 }
-.tabs button.likes.active {
+.tab-button.tab-button-likes.active {
   background: url(img/hart_on02.svg) no-repeat center;
   background-size: 40%;
 }
@@ -153,7 +157,7 @@ button {
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-#search {
+.search-panel {
   padding-top: 60px;
 }
 .search-box { 
@@ -194,18 +198,18 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   box-shadow: var(--shadow);
   position: relative;
 }
-#modal-body > .modal-body-section {
+.modal-body-section {
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 15px;
 }
 .modal-header { display: none; justify-content: flex-end; align-items: center; }
-#modal-title {
+.modal-title {
   display: none;
 }
 .modal-header button { border: none; background: transparent; cursor: pointer; }
-#modal-close {
+.modal-close-button {
   padding: 15px 0;
 }
 
@@ -255,7 +259,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   height: 25px;
 }
 
-#modal-body > .modal-actions {
+.modal-actions {
   display: grid;
   grid-template-columns: auto auto 1fr;
   gap: 20px;
@@ -307,7 +311,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   width: fit-content;
   border-radius: 9999px;
 }
-#export-btn {
+.export-button {
   font-size: 1.4rem;
   border: 1px solid #57a8ff;
   padding: 6px 10px;
@@ -344,14 +348,14 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 
 .image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}
 .image-content .full-image { width: 100%; height: auto; border-radius: 12px; }
-.image-content #image-close {
+.image-close-button {
   border: none;
   position: absolute;
   right: 15px;
   top: 13px;
   padding: 0;
 }
-.image-content #image-close {
+.image-close-button {
   width: 18px;
   display: flex;
 }
@@ -370,7 +374,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 .image-preview .remove-image-icon { border:none; width: 20px; height: 20px; }
 
-#fab-new-post {
+.fab-button {
   right: 20px;
   bottom: 80px;
   width: 56px;
@@ -382,20 +386,20 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   cursor: pointer;
   box-shadow: var(--shadow);
 }
-#text-block-container {
+.text-block-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-#fab-new-post:active { transform: translateY(1px); }
+.fab-button:active { transform: translateY(1px); }
 
 .modal .form-row .danger {
   border: none;
   padding: 0;
 }
 
-.modal #text-block-container + button {
+.add-text-button {
   color: #57a8ff;
   border: #57a8ff 2px solid;
   background: none;
@@ -406,12 +410,12 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   height: 40px;
   display: inline-block;
 }
-.modal #text-block-container + button:disabled {
+.add-text-button:disabled {
   opacity: .5;
 }
 
 @media (max-width: 640px) {
-  #fab-new-post {
+  .fab-button {
     font-size: 3rem;
     margin-top: -20px;
     font-weight: 600;
