@@ -293,6 +293,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
     if (currentUrl) {
       imagePreview.appendChild(removeImageBtn);
     }
+    imageRow.style.display = imagePreview.childElementCount ? '' : 'none';
   };
 
   renderPreview();
@@ -547,6 +548,7 @@ function renderPostCard(post, options = {}) {
     });
     tagsEl.appendChild(chip);
   });
+  tagsEl.style.display = post.tags.length ? '' : 'none';
 
   actions.innerHTML = '';
   if (!post.isDeleted) {
@@ -651,6 +653,7 @@ function renderPostCard(post, options = {}) {
     card.append(metaRow, bodyRow, actionsRow);
     repliesWrap.appendChild(card);
   });
+  repliesWrap.style.display = rels.length ? '' : 'none';
 
   return node;
 }
