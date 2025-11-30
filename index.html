@@ -12,11 +12,11 @@
 <body>
   <header class="app-header">
     <nav class="tabs">
-      <button data-tab="timeline" class="active timeline"></button>
-      <button data-tab="search" class="search"></button>
-      <button id="fab-new-post" aria-label="新規投稿">＋</button>
-      <button data-tab="images" class="images"></button>
-      <button data-tab="likes" class="likes"></button>
+      <button data-tab="timeline" class="tab-button tab-button-timeline active"></button>
+      <button data-tab="search" class="tab-button tab-button-search"></button>
+      <button id="fab-new-post" class="fab-button" aria-label="新規投稿">＋</button>
+      <button data-tab="images" class="tab-button tab-button-images"></button>
+      <button data-tab="likes" class="tab-button tab-button-likes"></button>
     </nav>
   </header>
 
@@ -28,14 +28,14 @@
           <input type="file" id="import-input" accept="application/json" class="file-input" />
           Import
         </label>
-        <button id="export-btn">Export</button>
+        <button id="export-btn" class="export-button">Export</button>
       </div>
     </section>
 
-    <section id="search" class="tab-panel">
+    <section id="search" class="tab-panel search-panel">
       <div class="search-box">
         <input type="text" id="search-input" placeholder="キーワード または #タグ で検索" class="search-input" />
-        <button id="search-btn" class="primary">Search</button>
+        <button id="search-btn" class="primary search-button">Search</button>
       </div>
       <div id="search-results" class="card-list"></div>
     </section>
@@ -52,8 +52,8 @@
   <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="modal-title">投稿</h2>
-        <button id="modal-close" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" style="display:flex"></button>
+        <h2 id="modal-title" class="modal-title">投稿</h2>
+        <button id="modal-close" class="modal-close-button" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" class="icon-inline"></button>
       </div>
       <div id="modal-body"></div>
     </div>
@@ -61,7 +61,7 @@
 
   <div id="image-viewer" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content image-content">
-      <button id="image-close" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" style="display:flex"></button>
+      <button id="image-close" class="modal-close-button image-close-button" aria-label="閉じる"><img src="img/delete.svg" alt="削除" width="18" class="icon-inline"></button>
       <img id="full-image" class="full-image" alt="拡大画像" />
     </div>
   </div>
