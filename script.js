@@ -154,13 +154,20 @@ function closeModal() {
   updateScrollLock();
 }
 
-function createTextBlockInput(value = '', lang = 'ja', removable = true, onRemove = null) {
+function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', removable = true, onRemove = null) {
   const wrapper = document.createElement('div');
   wrapper.className = 'text-area-wrapper';
 
   const textarea = document.createElement('textarea');
   textarea.value = value;
   wrapper.appendChild(textarea);
+
+  const pronunciationInput = document.createElement('input');
+  pronunciationInput.type = 'text';
+  pronunciationInput.placeholder = '発音（任意）';
+  pronunciationInput.className = 'pronunciation-input';
+  pronunciationInput.value = pronunciation;
+  wrapper.appendChild(pronunciationInput);
 
   const langRow = document.createElement('div');
   langRow.className = 'language-select';
@@ -215,8 +222,8 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
   const handleTextBlockChange = () => updateTextControls();
 
-  const addTextBlock = (content = '', language = 'ja') => {
-    const block = createTextBlockInput(content, language, true, handleTextBlockChange);
+  const addTextBlock = (content = '', language = 'ja', pronunciation = '') => {
+    const block = createTextBlockInput(content, language, pronunciation, true, handleTextBlockChange);
     textAreaContainer.appendChild(block);
     handleTextBlockChange();
   };
@@ -224,7 +231,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   if (targetPost) {
     textAreaContainer.innerHTML = '';
     const texts = targetPost.texts || [{ content: '', language: 'ja' }];
-    texts.forEach((t) => addTextBlock(t.content, t.language));
+    texts.forEach((t) => addTextBlock(t.content, t.language, t.pronunciation || ''));
   } else {
     addTextBlock();
   }
@@ -318,6 +325,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
     const textBlocks = Array.from(textAreaContainer.children).map((el) => ({
       content: el.querySelector('textarea').value.trim(),
       language: el.querySelector('select').value,
+      pronunciation: el.querySelector('.pronunciation-input').value.trim(),
     }));
     const hasContent = textBlocks.some((t) => t.content.length > 0);
     if (!hasContent) {
@@ -491,6 +499,13 @@ function renderPostCard(post, options = {}) {
       content.className = 'text-content';
       content.textContent = t.content;
       block.append(label, content);
+
+      if (t.pronunciation) {
+        const pronunciation = document.createElement('div');
+        pronunciation.className = 'pronunciation';
+        pronunciation.textContent = `発音: ${t.pronunciation}`;
+        block.appendChild(pronunciation);
+      }
       body.appendChild(block);
     });
 
@@ -587,6 +602,12 @@ function renderPostCard(post, options = {}) {
       content.className = 'text-content';
       content.textContent = t.content;
       block.append(label, content);
+      if (t.pronunciation) {
+        const pronunciation = document.createElement('div');
+        pronunciation.className = 'pronunciation';
+        pronunciation.textContent = `発音: ${t.pronunciation}`;
+        block.appendChild(pronunciation);
+      }
       bodyRow.appendChild(block);
     });
     if (reply.imageId && state.data.images[reply.imageId]) {
