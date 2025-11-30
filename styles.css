@@ -229,7 +229,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 .text-area-wrapper textarea:focus { outline: none; }
 .pronunciation-input {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 5px;
   padding: 6px;
   border: 1px solid #57a8ff;
   border-radius: 4px;
