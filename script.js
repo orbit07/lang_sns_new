@@ -195,7 +195,7 @@ function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', remov
   if (removable) {
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
-    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="20" class="icon-inline">';
+    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="25" class="icon-inline">';
     removeBtn.addEventListener('click', () => {
       if (wrapper.parentElement.children.length > 1) {
         wrapper.remove();
@@ -257,7 +257,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   const imageRow = document.createElement('div');
   imageRow.className = 'form-row';
   const fileLabel = document.createElement('label');
-  fileLabel.className = 'file-button modal-file-button';
+  fileLabel.className = 'modal-file-button';
   fileLabel.innerHTML = '<img src="img/img_off.svg" alt="画像" width="25" class="icon-inline">'
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
@@ -475,7 +475,7 @@ function renderPostCard(post, options = {}) {
     meta.innerHTML = '';
     const metaText = document.createElement('span');
     metaText.className = 'card-meta-item';
-    metaText.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（編集済み）' : ''}`;
+    metaText.textContent = `${formatDate(post.createdAt)}${post.updatedAt && post.updatedAt !== post.createdAt ? '（Edited）' : ''}`;
     meta.appendChild(metaText);
 
     if (post.repostOf) {
