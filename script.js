@@ -192,7 +192,7 @@ function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', remov
   if (removable) {
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
-    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="18" style="display:flex">';
+    removeBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="20" style="display:flex">';
     removeBtn.addEventListener('click', () => {
       if (wrapper.parentElement.children.length > 1) {
         wrapper.remove();
@@ -252,7 +252,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   imageRow.className = 'form-row';
   const fileLabel = document.createElement('label');
   fileLabel.className = 'file-button';
-  fileLabel.innerHTML = '<img src="img/img_on.svg" alt="画像" width="25" style="display:flex">'
+  fileLabel.innerHTML = '<img src="img/img_off.svg" alt="画像" width="25" style="display:flex">'
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
   fileInput.accept = 'image/*';
@@ -309,7 +309,7 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   actions.className = 'modal-actions';
   const cancelBtn = document.createElement('button');
   cancelBtn.type = 'button';
-  cancelBtn.textContent = 'Cancel';
+  cancelBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="25" style="display:flex">';
   cancelBtn.addEventListener('click', () => closeModal());
   const submitBtn = document.createElement('button');
   submitBtn.type = 'button';
@@ -536,29 +536,29 @@ function renderPostCard(post, options = {}) {
   if (!post.isDeleted) {
     const delBtn = document.createElement('button');
     delBtn.className = 'danger';
-    delBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="18" style="display:flex">';
+    delBtn.innerHTML = '<img src="img/delete.svg" alt="削除" width="20" style="display:flex">';
     delBtn.addEventListener('click', () => deletePost(post.id));
 
     const editBtn = document.createElement('button');
-    editBtn.innerHTML = '<img src="img/edit.svg" alt="編集" width="18" style="display:flex">';
+    editBtn.innerHTML = '<img src="img/edit.svg" alt="編集" width="20" style="display:flex">';
     editBtn.addEventListener('click', () => openModal(buildPostForm({ mode: 'edit', targetPost: post }), '投稿を編集'));
 
     const repostBtn = document.createElement('button');
     repostBtn.className = 'repost';
-    repostBtn.innerHTML = '<img src="img/repost.svg" alt="リポスト" width="18" style="display:flex">';
+    repostBtn.innerHTML = '<img src="img/repost.svg" alt="リポスト" width="20" style="display:flex">';
     repostBtn.addEventListener('click', () => {
       const duplicate = { ...post, repostOf: post.id };
       openModal(buildPostForm({ mode: 'create', targetPost: duplicate }), 'リポスト');
     });
 
     const replyBtn = document.createElement('button');
-    replyBtn.innerHTML = '<img src="img/reply.svg" alt="返信" width="18" style="display:flex">';
+    replyBtn.innerHTML = '<img src="img/reply.svg" alt="返信" width="20" style="display:flex">';
     replyBtn.addEventListener('click', () => openModal(buildPostForm({ mode: 'reply', parentId: post.id }), '返信'));
 
     const likeBtn = document.createElement('button');
     likeBtn.innerHTML = post.liked
-      ? '<img src="img/hart_on.svg" alt="いいね中" width="18" style="display:flex">'
-      : '<img src="img/hart_off.svg" alt="いいね" width="18" style="display:flex">';
+      ? '<img src="img/hart_on.svg" alt="いいね中" width="20" style="display:flex">'
+      : '<img src="img/hart_off.svg" alt="いいね" width="20" style="display:flex">';
     if (post.liked) likeBtn.classList.add('liked');
     likeBtn.addEventListener('click', () => toggleLike(post.id));
 
@@ -618,10 +618,10 @@ function renderPostCard(post, options = {}) {
     actionsRow.className = 'card-actions';
     const delReply = document.createElement('button');
     delReply.className = 'danger';
-    delReply.innerHTML = '<img src="img/delete.svg" alt="削除" width="18" style="display:flex">';
+    delReply.innerHTML = '<img src="img/delete.svg" alt="削除" width="20" style="display:flex">';
     delReply.addEventListener('click', () => deleteReply(reply.id));
     const editReply = document.createElement('button');
-    editReply.innerHTML = '<img src="img/edit.svg" alt="編集" width="18" style="display:flex">';
+    editReply.innerHTML = '<img src="img/edit.svg" alt="編集" width="20" style="display:flex">';
     editReply.addEventListener('click', () => openModal(buildPostForm({ mode: 'edit', targetPost: reply }), 'リプライを編集'));
     actionsRow.append(delReply, editReply);
 
