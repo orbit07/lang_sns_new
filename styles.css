@@ -257,12 +257,13 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 
 .modal-actions {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto auto 1fr;
   gap: 8px;
   position: sticky;
   bottom: 0;
   left: 0;
   backdrop-filter: blur(10px);
+  align-items: center;
 }
 .modal-actions > button {
   color: var(--muted);
@@ -275,6 +276,10 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   color: #fff;
   border: none;
   background: #57a8ff;
+}
+.modal-actions > .file-button {
+  width: auto;
+  min-width: 52px;
 }
 .file-button {
   border: 1px dashed #57a8ff;
@@ -321,7 +326,18 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 .image-actions .file-button { width: auto; }
 .image-preview {
+  position: relative;
   margin: 0 auto;
+}
+.remove-image-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border: none;
+  background: #fff;
+  padding: 0;
+  border-radius: 9999px;
+  box-shadow: var(--shadow);
 }
 
 .image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}

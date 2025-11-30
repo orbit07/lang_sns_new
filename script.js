@@ -206,7 +206,9 @@ function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', remov
 }
 
 function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) {
+  const fragment = document.createDocumentFragment();
   const container = document.createElement('div');
+  fragment.appendChild(container);
   const textAreaContainer = document.createElement('div');
   textAreaContainer.id = 'text-block-container';
   let addBtn;
@@ -248,8 +250,6 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
 
   const imageRow = document.createElement('div');
   imageRow.className = 'form-row';
-  const imageActions = document.createElement('div');
-  imageActions.className = 'image-actions';
   const fileLabel = document.createElement('label');
   fileLabel.className = 'file-button';
   fileLabel.innerHTML = '<img src="img/img_on.svg" alt="画像" width="25" style="display:flex">'
@@ -257,14 +257,11 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
   fileInput.type = 'file';
   fileInput.accept = 'image/*';
   fileLabel.appendChild(fileInput);
-  imageActions.appendChild(fileLabel);
 
   const removeImageBtn = document.createElement('button');
   removeImageBtn.type = 'button';
   removeImageBtn.innerHTML = '<img src="img/delete.svg" alt="画像を削除" width="30" style="display:flex">';
-  removeImageBtn.className = 'danger';
-  imageActions.appendChild(removeImageBtn);
-  imageRow.appendChild(imageActions);
+  removeImageBtn.className = 'remove-image-btn danger';
 
   const imagePreview = document.createElement('div');
   imagePreview.className = 'image-preview';
@@ -283,13 +280,11 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
       img.src = currentUrl;
       img.alt = '選択中の画像';
       imagePreview.appendChild(img);
-    } else {
-      const helper = document.createElement('div');
-      helper.className = 'helper';
-      helper.textContent = '画像は選択されていません。';
-      imagePreview.appendChild(helper);
     }
-    removeImageBtn.disabled = !currentUrl && !existingImageUrl;
+    removeImageBtn.hidden = !currentUrl;
+    if (currentUrl) {
+      imagePreview.appendChild(removeImageBtn);
+    }
   };
 
   renderPreview();
@@ -390,13 +385,13 @@ function buildPostForm({ mode = 'create', targetPost = null, parentId = null }) 
     render();
   });
 
-  actions.append(cancelBtn, submitBtn);
+  actions.append(cancelBtn, fileLabel, submitBtn);
 
   container.appendChild(textAreaContainer);
   container.appendChild(addBtn);
   container.appendChild(imageRow);
-  container.appendChild(actions);
-  return container;
+  fragment.appendChild(actions);
+  return fragment;
 }
 
 function playSpeech(text, lang) {
