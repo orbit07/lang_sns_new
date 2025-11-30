@@ -108,12 +108,11 @@ button {
 }
 
 .card-meta { font-size: 1.2rem; color: var(--muted); display: flex; gap: 8px; align-items: center; }
-.card-meta .card-meta-item { font-size: 1.2rem; display: flex; gap: 7px; }
+.card-meta-item { font-size: 1.2rem; display: flex; gap: 7px; }
 .card-body { margin: 8px 0; display: flex; flex-direction: column; gap: 8px; }
 .text-block { padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.9); }
 .text-label { font-size: 1.4rem; color: var(--muted); margin-bottom: 8px; display: flex; gap: 6px; align-items: center; }
-.text-label button,
-.language-select button {
+.text-action-button {
   font-size: 1.4rem;
   display: flex;
   gap: 5px;
@@ -138,9 +137,9 @@ button {
 .tag { background: #eef2f7; color: #334e68; padding: 4px 8px; border-radius: 12px; font-size: 1.2rem; cursor: pointer; }
 
 .card-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
-.card-actions button { border: none; background: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
-.card-actions .danger { color: #fff; background: none; border: none; }
-.card-actions .repost { color: var(--primary); border-color: var(--primary); }
+.card-action-button { border: none; background: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.danger-action-button { color: #fff; background: none; border: none; }
+.repost-action-button { color: var(--primary); border-color: var(--primary); }
 
 .replies { 
   margin-top: 15px;
@@ -152,7 +151,7 @@ button {
   gap: 10px;
 }
 .reply-card { border-radius: 10px; padding: 8px; }
-.reply-card .card-actions { width: 38%; }
+.reply-card-actions { width: 38%; }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
@@ -173,9 +172,9 @@ button {
   background: rgba(255, 255, 255, .5);
   backdrop-filter: blur(10px);
 }
-.search-box .search-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #57a8ff; }
+.search-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #57a8ff; }
 
-button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; width: 62%;}
+.primary-button { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; width: 62%;}
 
 .modal {
   position: fixed;
@@ -208,10 +207,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 .modal-title {
   display: none;
 }
-.modal-header button { border: none; background: transparent; cursor: pointer; }
-.modal-close-button {
-  padding: 15px 0;
-}
+.modal-close-button { border: none; background: transparent; cursor: pointer; padding: 15px 0; }
 
 .form-row { display: flex; gap: 8px; align-items: flex-start; flex-direction: column;}
 .text-area-wrapper {
@@ -224,7 +220,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   flex-direction: column;
   gap: 10px;
 }
-.text-area-wrapper .text-area {
+.text-area {
   width: 100%;
   min-height: 64px;
   border: none;
@@ -232,7 +228,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   border-radius: 4px;
   border: 1px solid #57a8ff;
 }
-.text-area-wrapper .text-area:focus { outline: none; }
+.text-area:focus { outline: none; }
 .pronunciation-input {
   width: 100%;
   padding: 6px;
@@ -253,7 +249,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 
 .language-select { display: flex; gap: 6px; align-items: center; }
-.language-select .language-select-input {
+.language-select-input {
   border: 1px solid #57a8ff;
   border-radius: 4px;
   height: 25px;
@@ -271,18 +267,18 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   padding: 10px 15px;
   background: rgba(255, 255, 255, .5);
 }
-.modal-actions > button {
+.modal-action-button {
   border: none;
   background: none;
 }
-.modal-actions > button.primary {
+.modal-primary-button {
   color: #fff;
   width: 100%;
   border: none;
   background: #57a8ff;
   padding: 5px;
 }
-.modal-actions > .file-button {
+.modal-file-button {
   width: auto;
   min-width: 52px;
   border: none;
@@ -300,7 +296,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   display: flex;
   justify-content: center;
 }
-.import_btn.file-button {
+.import-button {
   font-size: 1.4rem;
   border: 1px dashed #57a8ff;
   padding: 6px 10px;
@@ -321,16 +317,16 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   position: relative;
   overflow: hidden;
 }
-.file-button .file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
-.image-actions { 
+.image-actions {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 8px;
   align-items: center;
   width: 100%;
 }
-.image-actions .file-button { width: auto; }
+.image-action-file-button { width: auto; }
 .image-preview {
   position: relative;
   margin: 0 auto;
@@ -347,7 +343,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 }
 
 .image-content { width: min(900px, 96vw); position: relative; padding: 40px 15px 15px;}
-.image-content .full-image { width: 100%; height: auto; border-radius: 12px; }
+.full-image { width: 100%; height: auto; border-radius: 12px; }
 .image-close-button {
   border: none;
   position: absolute;
@@ -364,7 +360,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 
 .empty-state { text-align: center; padding: 24px; color: var(--muted); }
 
-.image-preview .image-preview-img {
+.image-preview-img {
   width: 160px;
   height: 120px;
   object-fit: cover;
@@ -372,7 +368,7 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
   border: 1px solid var(--border);
   display: block;
 }
-.image-preview .remove-image-icon { border:none; width: 20px; height: 20px; }
+.remove-image-icon { border:none; width: 20px; height: 20px; }
 
 .fab-button {
   right: 20px;
@@ -394,10 +390,6 @@ button.primary { background: #57a8ff; color: #fff; border: 1px solid #57a8ff; wi
 
 .fab-button:active { transform: translateY(1px); }
 
-.modal .form-row .danger {
-  border: none;
-  padding: 0;
-}
 
 .add-text-button {
   color: #57a8ff;
