@@ -49,13 +49,18 @@ button {
 }
 
 .header-left { display: none; gap: 15px; flex-wrap: wrap; flex-direction: column; align-items: flex-start; }
-.header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 20px; }
+.header-actions { 
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
 
 .tabs { display: flex; gap: 8px; justify-content: space-between; }
 .tab-button {
   border: none;
   background: none;
-  border-radius: 8px;
   cursor: pointer;
   color: var(--muted);
 }
@@ -107,24 +112,28 @@ button {
 .main-container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 20px 20px 80px;
+  padding: 10px 10px 75px;
 }
-.card-list { display: flex; flex-direction: column; gap: 12px; }
+.card-list { 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .card {
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  padding: 20px 20px 10px;
+  border-radius: 15px;
+  padding: 15px 15px 5px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.card-meta { font-size: 1.2rem; color: var(--muted); display: flex; gap: 8px; align-items: center; }
-.card-meta-item { font-size: 1.2rem; display: flex; gap: 7px; }
+.card-meta { font-size: 1.2rem; color: var(--muted); display: flex; gap: 5px; align-items: center; }
+.card-meta-item { font-size: 1.2rem; display: flex; gap: 5px; }
 .card-body { display: flex; flex-direction: column; gap: 10px; }
-.text-block { padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.9); }
+.text-block { padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.9); }
 .text-label { font-size: 1.4rem; color: var(--muted); margin-bottom: 8px; display: flex; gap: 5px; align-items: center; }
 .text-action-button {
   font-size: 1.4rem;
@@ -142,7 +151,7 @@ button {
   width: 100%;
   max-height: 150px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -150,7 +159,7 @@ button {
 .tag { background: #eef2f7; color: #334e68; padding: 4px 8px; border-radius: 12px; font-size: 1.2rem; cursor: pointer; }
 
 .card-actions { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
-.card-action-button { border: none; background: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; display: flex; }
+.card-action-button { border: none; background: none; padding: 5px 10px; border-radius: 10px; cursor: pointer; display: flex; }
 .danger-action-button { color: #fff; background: none; border: none; }
 .repost-action-button { color: var(--primary); border-color: var(--primary); }
 
@@ -163,7 +172,7 @@ button {
   gap: 10px;
 }
 .reply-card {
-  padding: 0 0 0 10px;
+  padding: 0 0 0 5px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -174,13 +183,12 @@ button {
 .tab-panel.active { display: block; }
 
 .search-panel {
-  padding: 50px 0 10px;
+  padding: 50px 0 0;
 }
 .search-box { 
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 5px;
   position: fixed;
   padding: 10px;
   min-width: 100%;
@@ -189,7 +197,7 @@ button {
   background: rgba(255, 255, 255, .5);
   backdrop-filter: blur(10px);
 }
-.search-input { flex: 1; padding: 5px; border-radius: 8px; border: 1px solid #57a8ff; }
+.search-input { flex: 1; padding: 5px; border-radius: 10px; border: 1px solid #57a8ff; }
 
 .primary-button { background: #57a8ff; color: #fff; border: 1px solid #57a8ff;}
 
@@ -207,7 +215,7 @@ button {
 .modal.hidden { display: none; }
 .modal-content {
   background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
+  border-radius: 15px;
   width: min(720px, 96vw);
   max-height: 90vh;
   overflow: auto;
@@ -218,7 +226,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px 20px 10px;
+  padding: 15px 15px 10px;
 }
 .modal-header { display: none; justify-content: flex-end; align-items: center; }
 .modal-title {
@@ -226,11 +234,11 @@ button {
 }
 .modal-close-button { border: none; background: transparent; cursor: pointer; padding: 15px 0; }
 
-.form-row { display: flex; gap: 8px; align-items: flex-start; flex-direction: column;}
+.form-row { display: flex; gap: 5px; align-items: flex-start; flex-direction: column;}
 .text-area-wrapper {
   background: #fff;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
   position: relative;
   display: flex;
@@ -243,7 +251,7 @@ button {
   min-height: 64px;
   border: none;
   resize: vertical;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid #57a8ff;
 }
 .text-area:focus { outline: none; }
@@ -251,13 +259,13 @@ button {
   width: 100%;
   padding: 5px;
   border: 1px solid #57a8ff;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 .pronunciation-input:focus { outline: none; }
 .remove-text-btn {
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: -10px;
+  right: -10px;
   width: 25px;
   height: 25px;
 }
@@ -268,7 +276,7 @@ button {
 .language-select { display: flex; gap: 5px; align-items: center; }
 .language-select-input {
   border: 1px solid #57a8ff;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 5px;
 }
 
@@ -280,7 +288,7 @@ button {
   bottom: 0;
   backdrop-filter: blur(10px);
   align-items: center;
-  padding: 10px 15px;
+  padding: 10px 20px;
   background: rgba(255, 255, 255, .5);
 }
 .modal-action-button {
@@ -299,7 +307,7 @@ button {
 .file-button {
   border: 1px dashed #57a8ff;
   padding: 5px 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #57a8ff;
   cursor: pointer;
   position: relative;
@@ -335,7 +343,7 @@ button {
 .image-actions {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   width: 100%;
 }
@@ -379,7 +387,7 @@ button {
   width: 160px;
   height: 120px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid var(--border);
   display: block;
 }
@@ -404,7 +412,7 @@ button {
 .text-block-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 .fab-button:active { transform: translateY(1px); }
