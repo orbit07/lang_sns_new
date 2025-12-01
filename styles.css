@@ -211,8 +211,22 @@ button {
   padding: 15px;
   z-index: 2000;
   backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 240ms ease;
 }
 .modal.hidden { display: none; }
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.modal.closing {
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+}
 .modal-content {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
@@ -221,6 +235,17 @@ button {
   overflow: auto;
   box-shadow: var(--shadow);
   position: relative;
+  transform: translateY(16px);
+  opacity: 0;
+  transition: transform 260ms ease, opacity 260ms ease;
+}
+.modal.active .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+.modal.closing .modal-content {
+  transform: translateY(-12px);
+  opacity: 0;
 }
 .modal-body-section {
   display: flex;

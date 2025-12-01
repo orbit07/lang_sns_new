@@ -138,6 +138,29 @@ function updateScrollLock() {
   document.body.classList.toggle('modal-open', modalOpen || imageOpen);
 }
 
+function showModalElement(modal) {
+  modal.classList.remove('hidden', 'closing');
+  requestAnimationFrame(() => modal.classList.add('active'));
+  updateScrollLock();
+}
+
+function hideModalElement(modal) {
+  let finished = false;
+  const complete = () => {
+    if (finished) return;
+    finished = true;
+    modal.classList.add('hidden');
+    modal.classList.remove('closing');
+    modal.removeEventListener('transitionend', complete);
+    updateScrollLock();
+  };
+
+  modal.addEventListener('transitionend', complete);
+  modal.classList.remove('active');
+  modal.classList.add('closing');
+  setTimeout(complete, 320);
+}
+
 function openModal(content, title = '投稿') {
   const modal = document.getElementById('modal');
   const body = document.getElementById('modal-body');
@@ -145,13 +168,11 @@ function openModal(content, title = '投稿') {
   titleEl.textContent = title;
   body.innerHTML = '';
   body.appendChild(content);
-  modal.classList.remove('hidden');
-  updateScrollLock();
+  showModalElement(modal);
 }
 
 function closeModal() {
-  document.getElementById('modal').classList.add('hidden');
-  updateScrollLock();
+  hideModalElement(document.getElementById('modal'));
 }
 
 function createTextBlockInput(value = '', lang = 'ja', pronunciation = '', removable = true, onRemove = null) {
@@ -663,13 +684,11 @@ function openImageViewer(src) {
   const viewer = document.getElementById('image-viewer');
   const img = document.getElementById('full-image');
   img.src = src;
-  viewer.classList.remove('hidden');
-  updateScrollLock();
+  showModalElement(viewer);
 }
 
 function closeImageViewer() {
-  document.getElementById('image-viewer').classList.add('hidden');
-  updateScrollLock();
+  hideModalElement(document.getElementById('image-viewer'));
 }
 
 function deletePost(id) {
